@@ -1,0 +1,5 @@
+no-permission: "&cNie masz uprawnień do tej komendy."
+usage: "&eUżycie: /monitor <reload|resetkey>"
+unknown-subcommand: "&cNieznana subkomenda. Dostępne: reload, resetkey"
+config-reloaded: "&aKonfiguracja monitora została przeładowana."
+key-reset: "&aKlucz API został zresetowany. Nowy klucz: &f{key}"

@@ -1,0 +1,12 @@
+# Minecraft Monitor Agent — konfiguracja
+# backend-url: bazowy URL backendu (bez trailing slash)
+backend-url: "http://localhost:8080"
+
+# api-key: generowany automatycznie przy pierwszym uruchomieniu
+api-key: ""
+
+# server-uuid: stały identyfikator serwera, generowany raz
+server-uuid: ""
+
+# interval-seconds: interwał zbierania metryk (w sekundach) gdy gracze online
+interval-seconds: 10

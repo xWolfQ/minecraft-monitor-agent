@@ -1,9 +1,22 @@
 name: MonitorPlugin
-version: '1.0-SNAPSHOT'
-main: com.github.xwolfq.monitorPlugin.MonitorPlugin
+version: '${project.version}'
+main: com.github.xwolfq.monitor.MonitorPlugin
 api-version: '1.21'
 prefix: MonitorAgent
 load: STARTUP
 authors: [ Dawid Kotyl ]
 description: Paper plugin acting as a metrics collection agent for the Minecraft Monitor system — an engineering thesis project for real-time game server environment monitoring.
 website: https://github.com/xwolfq/minecraft-monitor-agent
+
+commands:
+  monitor:
+    description: Komenda zarządzania agentem monitorującym
+    usage: /monitor <reload|resetkey>
+    permission: monitor.admin
+    permission-message: Nie masz uprawnień do tej komendy.
+    aliases: [ ma ]
+
+permissions:
+  monitor.admin:
+    description: Zezwala na użycie wszystkich subkomend /monitor
+    default: op
