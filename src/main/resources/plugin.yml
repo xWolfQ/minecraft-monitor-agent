@@ -1,0 +1,9 @@
+name: MonitorPlugin
+version: '1.0-SNAPSHOT'
+main: com.github.xwolfq.monitorPlugin.MonitorPlugin
+api-version: '1.21'
+prefix: MonitorAgent
+load: STARTUP
+authors: [ Dawid Kotyl ]
+description: Paper plugin acting as a metrics collection agent for the Minecraft Monitor system — an engineering thesis project for real-time game server environment monitoring.
+website: https://github.com/xwolfq/minecraft-monitor-agent
