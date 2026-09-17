@@ -8,7 +8,8 @@ public record PluginConfig(
         String backendUrl,
         String apiKey,
         String serverUuid,
-        int intervalSeconds
+        int intervalSeconds,
+        String metricsPath
 ) {
 
     /**
@@ -41,7 +42,8 @@ public record PluginConfig(
                 config.getString("backend-url", "http://localhost:8080"),
                 apiKey,
                 serverUuid,
-                config.getInt("interval-seconds", 10)
+                config.getInt("interval-seconds", 10),
+                config.getString("metrics-path", "/metrics")
         );
     }
 
@@ -55,6 +57,7 @@ public record PluginConfig(
         config.set("api-key", cfg.apiKey());
         config.set("server-uuid", cfg.serverUuid());
         config.set("interval-seconds", cfg.intervalSeconds());
+        config.set("metrics-path", cfg.metricsPath());
         plugin.saveConfig();
     }
 }

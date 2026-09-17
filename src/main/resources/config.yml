@@ -10,3 +10,6 @@ server-uuid: ""
 
 # interval-seconds: interwał zbierania metryk (w sekundach) gdy gracze online
 interval-seconds: 10
+
+# metrics-path: ścieżka endpointu backendu przyjmującego metryki (względna wobec backend-url)
+metrics-path: "/metrics"

@@ -11,7 +11,7 @@ website: https://github.com/xwolfq/minecraft-monitor-agent
 commands:
   monitor:
     description: Komenda zarządzania agentem monitorującym
-    usage: /monitor <reload|resetkey>
+    usage: /monitor <reload|resetkey|send>
     permission: monitor.admin
     permission-message: Nie masz uprawnień do tej komendy.
     aliases: [ ma ]

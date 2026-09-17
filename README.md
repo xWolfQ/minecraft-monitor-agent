@@ -21,16 +21,20 @@ backend-url: http://localhost:8080   # adres backendu Minecraft Monitor
 api-key: ''                          # generowany automatycznie
 server-uuid: ''                      # generowany automatycznie
 interval-seconds: 10                 # interwał zbierania metryk (sekundy)
+metrics-path: "/metrics"             # ścieżka endpointu przyjmującego metryki
 ```
 
 Plik `plugins/MinecraftMonitor/messages.yml`:
 
 ```yaml
 no-permission: "&cNie masz uprawnień do tej komendy."
-usage: "&eUżycie: /monitor <reload|resetkey>"
-unknown-subcommand: "&cNieznana subkomenda. Dostępne: reload, resetkey"
+usage: "&eUżycie: /monitor <reload|resetkey|send>"
+unknown-subcommand: "&cNieznana subkomenda. Dostępne: reload, resetkey, send"
 config-reloaded: "&aKonfiguracja monitora została przeładowana."
 key-reset: "&aKlucz API został zresetowany. Nowy klucz: &f{key}"
+send-requested: "&eTrwa zbieranie i wysyłanie statystyk do backendu..."
+send-success: "&aStatystyki zostały wysłane pomyślnie (&7{status}&a)."
+send-failure: "&cNie udało się wysłać statystyk: &f{error}"
 ```
 
 ## Komendy
@@ -39,6 +43,7 @@ key-reset: "&aKlucz API został zresetowany. Nowy klucz: &f{key}"
 |---|---|---|
 | `/monitor reload` | Przeładowuje konfigurację bez restartu serwera | `monitor.admin` |
 | `/monitor resetkey` | Generuje nowy API key i zapisuje do config.yml | `monitor.admin` |
+| `/monitor send` | Wymusza natychmiastowe zebranie i wysłanie statystyk do backendu | `monitor.admin` |
 
 ## Licencja
 

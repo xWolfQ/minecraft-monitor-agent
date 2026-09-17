@@ -18,7 +18,7 @@ public class MonitorCommand implements CommandExecutor {
 
     /**
      * Obsługuje komendę {@code /monitor}. Wymaga uprawnienia {@code monitor.admin}.
-     * Dostępne subkomendy: {@code reload}, {@code resetkey}.
+     * Dostępne subkomendy: {@code reload}, {@code resetkey}, {@code send}.
      *
      * @return zawsze {@code true} — komunikat o błędnym użyciu wysyłany jest ręcznie
      */
@@ -37,6 +37,7 @@ public class MonitorCommand implements CommandExecutor {
         return switch (args[0].toLowerCase()) {
             case "reload" -> handleReload(sender);
             case "resetkey" -> handleResetKey(sender);
+            case "send" -> handleSend(sender);
             default -> {
                 sender.sendMessage(plugin.getMessages().get("unknown-subcommand"));
                 yield true;
@@ -64,11 +65,31 @@ public class MonitorCommand implements CommandExecutor {
                 old.backendUrl(),
                 UUID.randomUUID().toString(),
                 old.serverUuid(),
-                old.intervalSeconds()
+                old.intervalSeconds(),
+                old.metricsPath()
         );
         PluginConfig.save(plugin, updated);
         plugin.reloadMonitorConfig();
         sender.sendMessage(plugin.getMessages().format("key-reset", "key", updated.apiKey()));
+        return true;
+    }
+
+    /**
+     * Wymusza zebranie i wysłanie statystyk do backendu.
+     *
+     * <p>Metryki są zbierane na głównym wątku serwera, a blokująca wysyłka HTTP
+     * wykonuje się asynchronicznie. Wynik trafia z powrotem na główny wątek,
+     * gdzie wysyłany jest komunikat do nadawcy komendy.</p>
+     */
+    private boolean handleSend(CommandSender sender) {
+        sender.sendMessage(plugin.getMessages().get("send-requested"));
+        plugin.collectAndSendAsync(result -> {
+            if (result.success()) {
+                sender.sendMessage(plugin.getMessages().format("send-success", "status", result.description()));
+            } else {
+                sender.sendMessage(plugin.getMessages().format("send-failure", "error", result.description()));
+            }
+        });
         return true;
     }
 }
